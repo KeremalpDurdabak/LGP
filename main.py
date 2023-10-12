@@ -6,7 +6,7 @@ from modules.Display import Display
 def main():
     # Initialize and Set the Dataset
     Dataset.load_data(Parameter.data_path)
-    Dataset.resample_data(200,'uniform') # 'uniform' or 'stratified'
+    Dataset.resample_data(200,'stratified') # 'uniform' or 'stratified'
 
     # Initialize and Generate the Initial Population
     population = Population()
@@ -18,7 +18,8 @@ def main():
         
         # Generate the next generation
         population.generate_next_gen()
-        Dataset.resample_data(200,'uniform') # 'uniform' or 'stratified'
+        if generation % 10 == 0:
+            Dataset.resample_data(200,'stratified') # 'uniform' or 'stratified'
 
     # #Compute best individual's score on the test dataset
     # population.compute_best_individual_test_fitness()
